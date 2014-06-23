@@ -20,6 +20,8 @@ var app = angular.module('grenadegithubiongApp', [
   ]);
 
 app.constant('GITHUB_API', 'https://api.github.com');
+app.constant('GITHUB_OWNER', 'pengwynn');
+app.constant('GITHUB_REPO', 'octokit');
 
 app.config(function ($routeProvider) {
     $routeProvider

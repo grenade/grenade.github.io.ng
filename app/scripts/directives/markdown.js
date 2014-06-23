@@ -9,9 +9,7 @@ app.directive('markdown', function ($compile, $http, Octocatfight) {
         replace: true,
         link: function (scope, element, attrs) {
             if ('src' in attrs) {
-                $http.get(attrs.src).then(function(data) {
-                    element.html(Octocatfight.makeHtml(data.data));
-                });
+                element.html(Octocatfight.getMakeHtml(attrs.src));
             } else if (element.text().trim().length) {
                 element.html(Octocatfight.makeHtml(element.text()));
             }

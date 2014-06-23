@@ -11,7 +11,7 @@ app.factory('Octocatfight',
   });
 */
 
-app.factory('Octocatfight', ['$http', function($http, GITHUB_API) {
+app.factory('Octocatfight', ['$http', function($http, GITHUB_API, GITHUB_OWNER, GITHUB_REPO) {
     var markdownRaw = function(markdown) {
         return $http({
             method: 'POST',
@@ -23,7 +23,17 @@ app.factory('Octocatfight', ['$http', function($http, GITHUB_API) {
             }
         });
     };
+    var getMarkdownRaw = function(path) {
+        return $http({
+            method: 'GET',
+            url: GITHUB_API + '/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + '/contents' + path
+        });
+    };
     return {
         makeHtml: function(markdown) { return markdownRaw(markdown); },
+        getMakeHtml: function(path) {
+            var markdown = window.atob(getMarkdownRaw(path).data.content);
+            return markdownRaw(markdown);
+        }
     };
 }]);
